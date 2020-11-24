@@ -20,7 +20,7 @@ jobs:
     - name: test
       env:
         CI_JOBS: 16
-        CI_CACHE_PATH: "/tmp/${{ github.sha }}"
+        CI_CACHE_PATH: "/tmp/${{ github.sha }}/"
         LOCAL_DEV_CHECK: 1
       run: |
         cp .env.example .env
