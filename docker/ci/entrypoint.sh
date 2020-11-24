@@ -16,6 +16,7 @@ chown $USER:$USER /usr/local/bundle
 chown $USER:$USER /home/$USER/openproject/frontend/node_modules
 chown $USER:$USER /home/$USER/openproject/public/assets/frontend
 chown $USER:$USER /home/$USER/openproject/tmp
+chown -R $USER:$USER /home/$USER/openproject
 
 cp docker/ci/database.yml config/
 
