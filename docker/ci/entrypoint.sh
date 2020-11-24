@@ -10,7 +10,7 @@ echo "create database app; create user app with superuser encrypted password 'p4
 mkdir -p /home/$USER/openproject/tmp
 mkdir -p /usr/local/bundle
 mkdir -p /home/$USER/openproject/frontend/node_modules
-mkdir -p /home/$USER/openproject/public/assets
+mkdir -p /home/$USER/openproject/public/assets/frontend
 
 chown $USER:$USER /usr/local/bundle
 chown $USER:$USER /home/$USER/openproject/frontend/node_modules
