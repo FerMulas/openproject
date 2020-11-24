@@ -26,19 +26,19 @@ if [ "$1" == "setup" ]; then
 	echo "Preparing environment for running tests..."
 	shift
 
-	time bundle install -j$JOBS
-	TEST_ENV_NUMBER=0 time bash ./script/ci/cache_prepare.sh
-	time bundle exec rake parallel:setup
+	su $USER -c "time bundle install -j$JOBS"
+	su $USER -c "TEST_ENV_NUMBER=0 time bash ./script/ci/cache_prepare.sh"
+	su $USER -c "time bundle exec rake parallel:setup"
 fi
 
 if [ "$1" == "run-units" ]; then
 	shift
-	exec time bundle exec rake parallel:units
+	exec su $USER -c "time bundle exec rake parallel:units"
 fi
 
 if [ "$1" == "run-features" ]; then
 	shift
-	exec time bundle exec rake parallel:features
+	exec su $USER -c "time bundle exec rake parallel:features"
 fi
 
 exec "$@"
