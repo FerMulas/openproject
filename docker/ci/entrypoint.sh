@@ -13,9 +13,9 @@ mkdir -p /home/$USER/openproject/frontend/node_modules
 mkdir -p /home/$USER/openproject/public/assets
 
 chown $USER:$USER /usr/local/bundle
-chown $USER:$USER /home/$USER/openproject/tmp
 chown $USER:$USER /home/$USER/openproject/frontend/node_modules
-chown $USER:$USER /home/$USER/openproject/public/assets
+chown $USER:$USER /home/$USER/openproject/public/assets/frontend
+chown $USER:$USER /home/$USER/openproject/tmp
 
 cp docker/ci/database.yml config/
 
