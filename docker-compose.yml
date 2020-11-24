@@ -154,7 +154,7 @@ services:
     build:
       context: ./docker/ci/
       dockerfile: Dockerfile
-    command: bash
+    command: setup run-units
     hostname: ci
     environment:
       RAILS_ENV: test
@@ -165,14 +165,15 @@ services:
       CAPYBARA_APP_HOSTNAME: ci
       OPENPROJECT_DISABLE_DEV_ASSET_PROXY: 1
       OPENPROJECT_TESTING_NO_HEADLESS: "true"
+      JOBS: "${CI_JOBS:-4}"
     tmpfs:
       - "/tmp"
     volumes:
       - ".:/home/dev/openproject"
-      - "fedata-test:/home/dev/openproject/public/assets/frontend"
-      - "bundle:/usr/local/bundle"
-      - "tmp:/home/dev/openproject/tmp"
-      - "npm:/home/dev/openproject/frontend/node_modules"
+      - "${CI_CACHE_PATH:-/tmp/}op-bundle:/usr/local/bundle"
+      - "${CI_CACHE_PATH:-/tmp/}op-node:/home/dev/openproject/frontend/node_modules"
+      - "${CI_CACHE_PATH:-/tmp/}op-assets:/home/dev/openproject/public/assets/frontend"
+      - "${CI_CACHE_PATH:-/tmp/}op-tmp:/home/dev/openproject/tmp"
     networks:
       - testing
     depends_on:
