@@ -1,0 +1,23 @@
+name: Core/TEST
+on:
+  push:
+
+jobs:
+  unit_tests:
+    if: github.repository == 'opf/openproject'
+    runs-on: [self-hosted, linux, ARM64, public]
+    timeout-minutes: 30
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache test dependencies
+      uses: actions/cache@v2
+      with:
+        path: /tmp/${{ github.ref }}
+        key: ${{ runner.os }}-tests
+    - name: Test
+      env:
+        CI_JOBS: 16
+        CI_CACHE_PATH: "/tmp/${{ github.ref }}"
+      run: |
+        docker-compose build ci
+        docker-compose run ci setup run-units
